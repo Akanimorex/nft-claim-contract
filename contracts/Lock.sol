@@ -6,24 +6,27 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract CourseCertificateNFT is ERC721URIStorage, Ownable {
     uint256 private _nextTokenId = 1;
+    string public certificateURI; // Store the fixed URI that all NFTs will use
 
-    constructor() ERC721("Course Certificate", "CCERT") Ownable(msg.sender) {}
+    constructor(string memory _certificateURI) ERC721("Course Certificate", "CCERT") Ownable(msg.sender) {
+        certificateURI = _certificateURI; // Set the URI during deployment
+    }
 
-    function mintCertificate(address student, string memory tokenURI) public onlyOwner returns (uint256) {
+    function mintCertificate() public returns (uint256) {
         // Get the next token ID and increment
         uint256 tokenId = _nextTokenId;
         _nextTokenId++;
         
-        // Mint the NFT to the student
-        _safeMint(student, tokenId);
+        // Mint the NFT to the caller's address
+        _safeMint(msg.sender, tokenId);
         
         // Set the token URI (metadata pointing to the NFT image)
-        _setTokenURI(tokenId, tokenURI);
+        _setTokenURI(tokenId, certificateURI);
         
         return tokenId;
     }
 
-    // Function to check if a student has a certificate
+    // Function to check if an address has a certificate
     function hasCertificate(address student) public view returns (bool) {
         return balanceOf(student) > 0;
     }

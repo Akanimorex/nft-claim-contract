@@ -8,7 +8,7 @@ async function main() {
   const CourseCertificateNFT = await ethers.getContractFactory("CourseCertificateNFT");
 
   // Deploy the contract with the fixed certificate URI
-  const contract = await CourseCertificateNFT.deploy([certificateURI] as any); // Explicitly cast certificateURI
+  const contract = await CourseCertificateNFT.deploy(certificateURI as any); // Explicitly cast certificateURI
 
   // Ensure the contract is deployed
   await contract.waitForDeployment();
