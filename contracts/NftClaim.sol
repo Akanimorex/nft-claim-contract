@@ -35,4 +35,16 @@ contract CourseCertificateNFT is ERC721URIStorage, Ownable {
     function getCurrentTokenId() public view returns (uint256) {
         return _nextTokenId - 1;
     }
+
+
+    // Override onERC725XBeforeContractAddressTransferred instead
+    function _onERC721Received(
+        address,
+        address,
+        uint256 /*firstTokenId*/,
+        bytes memory /*data*/
+    ) internal virtual  {
+            require(msg.sender == address(0), "This NFT is soulbound and cannot be transferred");
+
+    }
 }
