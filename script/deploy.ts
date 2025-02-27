@@ -2,7 +2,7 @@ import { ethers } from "hardhat";
 
 async function main() {
   // Define the certificate URI
-  const certificateURI: string = "ipfs://bafkareick4f4rfu3rqdzyzrhs2jum2lj3yyyxtlwp5boey5oknpsg5u5tle"; // Replace with actual IPFS or metadata link
+  const certificateURI: string = "ipfs://bafkreicgeq73eavrzwxrvd53q34pyvs2jpgn7gdebmxac7zokmnymjwjl4"; // Replace with actual IPFS or metadata link
 
   // Get the contract factory
   const CourseCertificateNFT = await ethers.getContractFactory("CourseCertificateNFT");
